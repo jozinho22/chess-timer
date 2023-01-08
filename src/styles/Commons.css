@@ -1,0 +1,71 @@
+.OptionContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.OptionButton {
+    padding: 30px 0 40px 0px;
+    width: 200px;
+    font-family: 'Old London';
+    font-size: x-large;
+}
+
+.OptionTitle {
+    margin-top: 20px;
+    font-size: xx-large;
+}
+
+.GameDisplayerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.GameDisplayerButton {
+    padding: 20px;
+    width: 400px;
+    height: 30vh;
+    font-family: 'Old London';
+    font-size: 50px;
+}
+
+.WhitesContainer {
+    transform: rotate(180deg);
+}
+
+.GameDisplayerButton.Filter {
+   filter: blur(2px);
+}
+
+.InfosContainer {
+    transform: rotate(-90deg);
+    position: absolute;
+    left: 50%;
+    max-width: 100vh;
+    font-size: 50px;
+}
+
+.TeamInfosContainer {
+    margin-top: 20px;
+    width: 50%;
+    position: relative;
+    border-radius: 6px;
+}
+
+.WhitesContainer .TeamInfosContainer {
+   background-color: aliceblue;
+   color: black;
+}
+
+.BlacksContainer .TeamInfosContainer {
+   background-color: inherit;
+   color: aliceblue;
+}
+
+.Focus {
+    box-shadow: 0px 10px 10px 10px rgb(25, 148, 74);
+}

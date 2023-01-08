@@ -1,13 +1,18 @@
-.OptionContainer {
+
+.ChoicesDisplayerContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    flex-wrap: wrap;
-    flex-grow: 1;
     gap: 10px;
-
 }
+/* .OptionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+} */
 
 .OptionButton {
     padding: 30px 0 40px 0px;
@@ -50,27 +55,27 @@
    filter: blur(2px);
 }
 
-.InfosContainer {
+/* .InfosContainer {
     transform: rotate(-90deg);
     position: absolute;
     left: 40%;
     max-width: 100vh;
     font-size: 50px;
-}
+} */
 
-.TeamInfosContainer {
+.TeamCampContainer {
     margin-top: 20px;
     width: 50%;
     position: relative;
     border-radius: 6px;
 }
 
-.WhitesContainer .TeamInfosContainer {
+.WhitesContainer .TeamCampContainer {
    background-color: aliceblue;
    color: black;
 }
 
-.BlacksContainer .TeamInfosContainer {
+.BlacksContainer .TeamCampContainer {
    background-color: inherit;
    color: aliceblue;
 }
@@ -79,16 +84,30 @@
     box-shadow: 0px 10px 10px 10px rgb(25, 148, 74);
 }
 
-.SideButtonsContainer {
+.SideButtonsContainer, .InfosContainer {
     transform: rotate(-90deg);
     position: absolute;
-    right: 40%;
+    top: 40%;
     max-width: 100vh;
     font-size: 50px;
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.SideButtonsContainer {
+    right: 60%;
+}
+
+.InfosContainer {
+    left: 40%;
+}
+
+@media screen and (width > 450px){
+    .SideButtonsContainer {
+        right: 40%;
+    }
 }
 
 .SideButtonsContainer button {

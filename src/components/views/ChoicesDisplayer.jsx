@@ -51,29 +51,31 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setViewType, set
     }
 
     return  <>
-                {
-                    viewType === EnumViewTypes.GAME_TYPE ?
-                        <p className="OptionTitle">Choose the type of game </p> 
-                            :   <p className="OptionTitle">Choose the duration </p>        
-                }
-                
-                {
-                    getDataToMap(user.choice).map(data => {
-                        return <Option
-                                    key={data.id} 
-                                    data={data} 
-                                    choose={choose}
-                                    viewType={viewType} />
-                    })
-                }
-                {
-                    viewType !== EnumViewTypes.GAME_TYPE ?
-                        <Container className="SideButtonsContainer">
-                            <Button className="ReturnButton" onClick={goBack}>Go back</Button>
-                        </Container>
-                            : <></>
-                }
+                <Container className="ChoicesDisplayerContainer">
+                    {
+                        viewType === EnumViewTypes.GAME_TYPE ?
+                            <p className="OptionTitle">Choose the type of game </p> 
+                                :   <p className="OptionTitle">Choose the duration </p>        
+                    }
+                    
+                    {
+                        getDataToMap(user.choice).map(data => {
+                            return <Option
+                                        key={data.id} 
+                                        data={data} 
+                                        choose={choose}
+                                        viewType={viewType} />
+                        })
+                    }
+                    {
+                        viewType !== EnumViewTypes.GAME_TYPE ?
+                            <Container className="SideButtonsContainer">
+                                <Button className="ReturnButton" onClick={goBack}>Go back</Button>
+                            </Container>
+                                : <></>
+                    }
 
+                </Container>
             </>
 
 }

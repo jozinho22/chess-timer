@@ -13,14 +13,14 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
     const [whiteSeconds, setWhiteSeconds] =  React.useState(0);
     const [blackMinutes, setBlackMinutes] = React.useState(0);
     const [blackSeconds, setBlackSeconds] =  React.useState(0);
-    var additionalTime = 0;
-
-    var whiteLose = running && whiteMinutes === 0 && whiteSeconds === 0;
-    var blackLose = running && blackMinutes === 0 && blackSeconds === 0;
+    const [additionalTime, setAdditionalTime] =  React.useState(0);
 
     React.useEffect(() => {
         var whiteLose = running && whiteMinutes === 0 && whiteSeconds === 0;
         var blackLose = running && blackMinutes === 0 && blackSeconds === 0;
+        if(whiteLose || blackLose) {
+            setRunning(false)
+        }
         if(whiteLose) {
             setLoser(0)
         } else if(blackLose) {
@@ -34,13 +34,14 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
 
     const init = () => {
         setEndGame(false)
+        setRunning(false)
         setTurn(0)
         setLoser({})
-        console.log(user.choices)
-        additionalTime = gameTypes[user.choices[0]].times[user.choices[1]].additionalTime;
+        /* setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime); */
+        setAdditionalTime(1)
         /* var duration = gameTypes[user.choices[0]].times[user.choices[1]].duration;
         duration *= 60; */
-        var duration = 4;
+        var duration = 3;
         initTimer(0, duration);
         initTimer(1, duration);
     }
@@ -97,7 +98,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                 inPause={!running ? 1 : turn} 
                                 additionalTime={additionalTime} />
                         </Button>
-                        <Container className="TeamInfosContainer">
+                        <Container className="TeamCampContainer">
                             <p className={`${turn === 0 ? "Focus" : ""}`}>Whites</p>
                         </Container>
                         
@@ -116,7 +117,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                 inPause={!running ? 1 : !turn} 
                                 additionalTime={additionalTime} />
                         </Button>
-                        <Container className="TeamInfosContainer">
+                        <Container className="TeamCampContainer">
                             <p className={`${turn === 1 ? "Focus" : ""}`}>Blacks</p>
                         </Container>
                     </Container>
@@ -126,10 +127,6 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                             loser === 0 ? "Blacks win..." 
                                 :   loser === 1 ?  "Whites win..."
                                     :""
-                        }
-                        {
-                            additionalTime > 0 ? "Additional time : " + additionalTime + "s" 
-                                : "" 
                         }
                     </p>
                 </Container>

@@ -2,8 +2,6 @@ import React from 'react';
 
 const Timer = ({minutes, setMinutes, seconds, setSeconds, running, setRunning, turn, additionalTime}) => {
 
-    const [beginning, setBeginning] = React.useState(true);
-
     function addTime(additionalTime) {
         if(additionalTime + seconds > 59) {
             setMinutes(minutes + 1)
@@ -14,15 +12,11 @@ const Timer = ({minutes, setMinutes, seconds, setSeconds, running, setRunning, t
     }
 
     React.useEffect(() => {
-        console.log("useEff")
-        console.log(additionalTime)
         if(!turn) {
-            if(!beginning) {
+            if(running) {
                 if(additionalTime > 0) {
                     addTime(additionalTime)
                 }
-            } else {
-                setBeginning(false)
             }
         }
     }, [!turn])

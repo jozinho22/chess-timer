@@ -46,12 +46,26 @@
     position: relative;
 }
 
+.GameDisplayerContainer > div {
+    width: 100%;
+}
+
+.GameDisplayerContainer .Blur {
+    filter: blur(10px);
+}
+
 .GameDisplayerButton {
     padding: 20px;
-    width: 70%;
+    width: 40%;
     height: 30vh;
     font-family: 'Old London';
     font-size: 50px;
+}
+
+@media(max-width: 450px) {
+   .GameDisplayerButton {
+        width: 80%;
+   }
 }
 
 .WhitesContainer {
@@ -77,9 +91,15 @@
 
 .TeamCampContainer {
     margin-top: 20px;
-    width: 80%;
+    width: 30%;
     position: relative;
     border-radius: 6px;
+}
+
+@media(max-width: 450px) {
+   .TeamCampContainer {
+        width: 70%;
+   }
 }
 
 .WhitesContainer .TeamCampContainer {
@@ -102,25 +122,33 @@
     left: 10px;
 }
 
-.TopLeftButtonsContainer svg {
-    vertical-align: none;
+svg {
+    vertical-align: unset;
 }
 
 .SideButtonsContainer, .InfosContainer {
-    transform: rotate(-90deg);
+    transform: none;
     position: absolute;
     display:flex;
     flex-direction: column;
+    align-items: center;
     gap: 30px;    
 }
 
 .SideButtonsContainer { 
-    left: -44px;
+    right: 0px;
+}
+
+@media(max-width: 450px) {
+   .SideButtonsContainer {
+        right: 10px;
+   }
 }
 
 .InfosContainer {
-    left: 43%;
-}
+    top: 25%;
+    font-size: 50px;
+} 
 
 .ReturnButton {
     background-color: rgb(170, 150, 60);
@@ -129,11 +157,44 @@
 .ReturnButton:hover {
     background-color: rgb(126, 112, 53);
 }
-.PlayAgainButton {
+
+.PlayAgainButton, .PlayAgainEndGameButton  {
     background-color: rgb(48, 105, 72);
+}
+
+.PlayAgainButton:hover, .PlayAgainEndGameButton:hover {
+    background-color: rgb(39, 82, 57);
+}
+
+.PlayAgainEndGameButton {
     font-size: 30px;
 }
 
-.PlayAgainButton:hover {
-    background-color: rgb(39, 82, 57);
+.StayEndGameButton {
+    background-color: rgb(170, 150, 60);
+    font-size: 30px;
+    color: rgb(56, 59, 61);
+}
+
+.StayEndGameButton:hover {
+    background-color: rgb(126, 112, 53);
+}
+
+.PlayAgainEndGameButton, .StayEndGameButton {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.WinningBox {
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.WinningBox.Whites {
+    background-color: aliceblue;
+    color: rgb(22, 22, 2);
+}
+
+.WinningBox.Blacks {
+    background-color: rgb(22, 22, 22);
+    color: aliceblue;
 }

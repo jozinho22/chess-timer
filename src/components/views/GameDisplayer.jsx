@@ -2,6 +2,9 @@ import React from "react";
 import { Container, Button } from "react-bootstrap";
 import Timer from "../Timer";
 import ReturnButton from "../ReturnButton";
+import {RxPlay} from 'react-icons/rx';
+import {GiCrossMark} from 'react-icons/gi';
+import {RxUpdate} from 'react-icons/rx';
 
 const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
 
@@ -21,6 +24,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         var blackLose = running && blackMinutes === 0 && blackSeconds === 0;
         if(whiteLose || blackLose) {
             setRunning(false)
+            setEndGame(true)
         }
         if(whiteLose) {
             setLoser(0)
@@ -39,10 +43,10 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         setTurn(0)
         setLoser({})
         setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
-        /* setAdditionalTime(1) */
         var duration = gameTypes[user.choices[0]].times[user.choices[1]].duration;
         duration *= 60;
-        /* var duration = 3; */
+        /* setAdditionalTime(1) 
+        var duration = 3; */ 
         initTimer(0, duration);
         initTimer(1, duration);
     }
@@ -73,7 +77,6 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
     const goBack = () => {
         setInGame(false);
         var u = {...user};
-        console.log(u)
         u.choices.pop();
         u.choice = u.choices[0];
         setUser(u);
@@ -83,60 +86,84 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         init();
     }
 
+    const stay = () => {
+        setEndGame(false);
+    }
+
     return  <>
                 <Container className="GameDisplayerContainer">
-                    <Container className="WhitesContainer">
-                        <Button 
-                            className={`GameDisplayerButton ${loser === 0 ? "Lose" : turn === 1 ? "Filter" : "" }`}
-                            onClick={doProcess} 
-                            disabled={!isNaN(loser) || turn === 1} >
-                            <Timer
-                                minutes={whiteMinutes}
-                                setMinutes={setWhiteMinutes}
-                                seconds={whiteSeconds}
-                                setSeconds={setWhiteSeconds}
-                                running={running}
-                                setRunning={setRunning} 
-                                turn={!turn} 
-                                additionalTime={additionalTime} />
-                        </Button>
-                        <Container className="TeamCampContainer">
-                            <p className={`${turn === 0 ? "Focus" : ""}`}>Whites</p>
+                    <div className={`${endGame ? "Blur" : ""}`}>
+                        <Container className="WhitesContainer">
+                            <Button 
+                                className={`GameDisplayerButton ${loser === 0 ? "Lose" : turn === 1 ? "Filter" : "" }`}
+                                onClick={doProcess} 
+                                disabled={!isNaN(loser) || turn === 1} >
+                                <Timer
+                                    minutes={whiteMinutes}
+                                    setMinutes={setWhiteMinutes}
+                                    seconds={whiteSeconds}
+                                    setSeconds={setWhiteSeconds}
+                                    running={running}
+                                    setRunning={setRunning} 
+                                    turn={!turn} 
+                                    additionalTime={additionalTime} />
+                            </Button>
+                            <Container className="TeamCampContainer">
+                                <p className={`${turn === 0 ? "Focus" : ""}`}>Whites</p>
+                            </Container>
+                            
                         </Container>
-                        
-                    </Container>
-                    <Container className="BlacksContainer">
-                        <Button 
-                            className={`GameDisplayerButton ${loser === 1 ? "Lose" : turn === 0 ? "Filter" : "" }`}
-                            onClick={doProcess} 
-                            disabled={!isNaN(loser) || turn === 0} >
-                            <Timer
-                                minutes={blackMinutes}
-                                setMinutes={setBlackMinutes}
-                                seconds={blackSeconds}
-                                setSeconds={setBlackSeconds}
-                                running={running}
-                                setRunning={setRunning}
-                                turn={turn} 
-                                additionalTime={additionalTime} />
-                        </Button>
-                        <Container className="TeamCampContainer">
-                            <p className={`${turn === 1 ? "Focus" : ""}`}>Blacks</p>
+                        <Container className="BlacksContainer">
+                            <Button 
+                                className={`GameDisplayerButton ${loser === 1 ? "Lose" : turn === 0 ? "Filter" : "" }`}
+                                onClick={doProcess} 
+                                disabled={!isNaN(loser) || turn === 0} >
+                                <Timer
+                                    minutes={blackMinutes}
+                                    setMinutes={setBlackMinutes}
+                                    seconds={blackSeconds}
+                                    setSeconds={setBlackSeconds}
+                                    running={running}
+                                    setRunning={setRunning}
+                                    turn={turn} 
+                                    additionalTime={additionalTime} />
+                            </Button>
+                            <Container className="TeamCampContainer">
+                                <p className={`${turn === 1 ? "Focus" : ""}`}>Blacks</p>
+                            </Container>
                         </Container>
-                    </Container>
-                    <Container className="InfosContainer">
-                    <p>{
-                            loser === 0 ? "Blacks win..." 
-                                :   loser === 1 ?  "Whites win..."
-                                    :""
-                        }
-                    </p>
-                    </Container>
-                    <div className="SideButtonsContainer">
-                        <Button className="PlayAgainButton" onClick={playAgain}>Play Again</Button>
+            
+                        <div className="SideButtonsContainer">
+                            <Button className="PlayAgainButton" onClick={playAgain}><RxUpdate /></Button>
+                        </div>
+                        <ReturnButton goBack={goBack} />
                     </div>
-                    <ReturnButton goBack={goBack} />
+                    <Container className="InfosContainer">
+                    {
+                        endGame ? 
+                            <>
+                                <div className={`WinningBox ${loser === 0 ? "Whites" : "Blacks"}`}>
+                                    {loser === 0 ? 
+                                        "Blacks won on time..." : 
+                                            loser === 1 ? "Whites won on time..." 
+                                                : ""
+                                    }
+                                </div>
+                                <Button className="PlayAgainEndGameButton" onClick={playAgain}>
+                                    Play Again
+                                    <RxPlay />
+                                </Button>
+                                <Button className="StayEndGameButton" onClick={stay}>
+                                    Stay
+                                    <GiCrossMark />
+                                </Button>
+                            </>
+                                :   <></>
+                    }
+                   
                 </Container>
+                </Container>
+                
             </>
 }
 

@@ -5,11 +5,11 @@ import EnumViewTypes from './content/EnumViewTypes';
 
 const Option = ( {data, choose, viewType} ) => {
     
-    return  <Container className="OptionContainer">
+    return  <>
                 <Button className="OptionButton" onClick={() => choose(data.id)}>
                     {viewType === EnumViewTypes.GAME_TYPE ? data.type : data.duration + (data.additionalTime > 0 ? " | " + data.additionalTime: "")}
                 </Button>
-            </Container>
+            </>
 
 }
 

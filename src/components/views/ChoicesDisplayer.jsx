@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Container } from 'react-bootstrap';
 import EnumViewTypes from "../content/EnumViewTypes";
 import Option from '../Option';
+import ReturnButton from '../ReturnButton';
 
 const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setViewType, setInGame} ) => {
 
@@ -52,12 +53,14 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setViewType, set
 
     return  <>
                 <Container className="ChoicesDisplayerContainer">
+                    <div className="ChoicesTitle">
                     {
                         viewType === EnumViewTypes.GAME_TYPE ?
-                            <p className="OptionTitle">Choose the type of game </p> 
-                                :   <p className="OptionTitle">Choose the duration </p>        
+                            <p>Choose the type of game </p> 
+                                :   <p>Choose the duration </p>        
                     }
-                    
+                    </div>
+                    <div className="ChoicesContainer">
                     {
                         getDataToMap(user.choice).map(data => {
                             return <Option
@@ -67,11 +70,10 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setViewType, set
                                         viewType={viewType} />
                         })
                     }
+                    </div>
                     {
                         viewType !== EnumViewTypes.GAME_TYPE ?
-                            <Container className="SideButtonsContainer">
-                                <Button className="ReturnButton" onClick={goBack}>Go back</Button>
-                            </Container>
+                            <ReturnButton goBack={goBack} />
                                 : <></>
                     }
 

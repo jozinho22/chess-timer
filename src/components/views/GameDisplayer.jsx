@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Button } from "react-bootstrap";
 import Timer from "../Timer";
+import ReturnButton from "../ReturnButton";
 
 const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
 
@@ -37,11 +38,11 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         setRunning(false)
         setTurn(0)
         setLoser({})
-        /* setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime); */
-        setAdditionalTime(1)
-        /* var duration = gameTypes[user.choices[0]].times[user.choices[1]].duration;
-        duration *= 60; */
-        var duration = 3;
+        setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
+        /* setAdditionalTime(1) */
+        var duration = gameTypes[user.choices[0]].times[user.choices[1]].duration;
+        duration *= 60;
+        /* var duration = 3; */
         initTimer(0, duration);
         initTimer(1, duration);
     }
@@ -94,8 +95,9 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                 setMinutes={setWhiteMinutes}
                                 seconds={whiteSeconds}
                                 setSeconds={setWhiteSeconds}
+                                running={running}
                                 setRunning={setRunning} 
-                                inPause={!running ? 1 : turn} 
+                                turn={!turn} 
                                 additionalTime={additionalTime} />
                         </Button>
                         <Container className="TeamCampContainer">
@@ -113,26 +115,27 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                 setMinutes={setBlackMinutes}
                                 seconds={blackSeconds}
                                 setSeconds={setBlackSeconds}
+                                running={running}
                                 setRunning={setRunning}
-                                inPause={!running ? 1 : !turn} 
+                                turn={turn} 
                                 additionalTime={additionalTime} />
                         </Button>
                         <Container className="TeamCampContainer">
                             <p className={`${turn === 1 ? "Focus" : ""}`}>Blacks</p>
                         </Container>
                     </Container>
-                </Container>
-                <Container className="InfosContainer">
+                    <Container className="InfosContainer">
                     <p>{
                             loser === 0 ? "Blacks win..." 
                                 :   loser === 1 ?  "Whites win..."
                                     :""
                         }
                     </p>
-                </Container>
-                <Container className="SideButtonsContainer">
-                    <Button className="ReturnButton" onClick={goBack}>Go back</Button>
-                    <Button className="PlayAgainButton" onClick={playAgain}>Play Again</Button>
+                    </Container>
+                    <div className="SideButtonsContainer">
+                        <Button className="PlayAgainButton" onClick={playAgain}>Play Again</Button>
+                    </div>
+                    <ReturnButton goBack={goBack} />
                 </Container>
             </>
 }

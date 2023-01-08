@@ -3,8 +3,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    gap: 30px;
+    position: relative;
+}
+
+.ChoicesContainer {
+    display: inherit;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
 }
 /* .OptionContainer {
     display: flex;
@@ -15,15 +22,18 @@
 } */
 
 .OptionButton {
-    padding: 30px 0 40px 0px;
+    padding: 20px 0 20px 0px;
     font-family: 'Old London';
     font-size: xx-large;
     width: 200px;
 }
 
-.OptionTitle {
+/* .ChoicesTitle {
     margin-top: 20px;
-    font-size: xx-large;
+} */
+
+.ChoicesTitle p {
+    font-size: 45px;
 }
 
 .GameDisplayerContainer {
@@ -32,11 +42,13 @@
     justify-content: space-evenly;
     align-items: center;
     flex-grow: 1;
+    flex-shrink: 1;
+    position: relative;
 }
 
 .GameDisplayerButton {
     padding: 20px;
-    width: 400px;
+    width: 70%;
     height: 30vh;
     font-family: 'Old London';
     font-size: 50px;
@@ -65,7 +77,7 @@
 
 .TeamCampContainer {
     margin-top: 20px;
-    width: 50%;
+    width: 80%;
     position: relative;
     border-radius: 6px;
 }
@@ -84,38 +96,31 @@
     box-shadow: 0px 10px 10px 10px rgb(25, 148, 74);
 }
 
+.TopLeftButtonsContainer {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+}
+
+.TopLeftButtonsContainer svg {
+    vertical-align: none;
+}
+
 .SideButtonsContainer, .InfosContainer {
     transform: rotate(-90deg);
     position: absolute;
-    top: 40%;
-    max-width: 100vh;
-    font-size: 50px;
     display:flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+    flex-direction: column;
+    gap: 30px;    
 }
 
-.SideButtonsContainer {
-    right: 60%;
+.SideButtonsContainer { 
+    left: -44px;
 }
 
 .InfosContainer {
-    left: 40%;
+    left: 43%;
 }
-
-@media screen and (width > 450px){
-    .SideButtonsContainer {
-        right: 40%;
-    }
-}
-
-.SideButtonsContainer button {
-    font-size: 30px;
-    padding: 20px;
-    border: none;
-}
-
 
 .ReturnButton {
     background-color: rgb(170, 150, 60);
@@ -126,6 +131,7 @@
 }
 .PlayAgainButton {
     background-color: rgb(48, 105, 72);
+    font-size: 30px;
 }
 
 .PlayAgainButton:hover {

@@ -1,12 +1,12 @@
 import React from "react";
 import { Container, Button } from "react-bootstrap";
 import Timer from "../Timer";
-import EnumViewTypes from "../content/EnumViewTypes";
 
-const GameDisplayer = ( {gameTypes, user, setViewType} ) => {
+const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
 
     const [running, setRunning] = React.useState(false);
-    const [endTimer, setEndTimer] = React.useState(false);
+    const [endGame, setEndGame] = React.useState(false);
+    const [loser, setLoser] = React.useState({});
 
     const [turn, setTurn] = React.useState(0);
     const [whiteMinutes, setWhiteMinutes] = React.useState(0);
@@ -15,17 +15,39 @@ const GameDisplayer = ( {gameTypes, user, setViewType} ) => {
     const [blackSeconds, setBlackSeconds] =  React.useState(0);
     var additionalTime = 0;
 
+    var whiteLose = running && whiteMinutes === 0 && whiteSeconds === 0;
+    var blackLose = running && blackMinutes === 0 && blackSeconds === 0;
+
     React.useEffect(() => {
+        var whiteLose = running && whiteMinutes === 0 && whiteSeconds === 0;
+        var blackLose = running && blackMinutes === 0 && blackSeconds === 0;
+        if(whiteLose) {
+            setLoser(0)
+        } else if(blackLose) {
+            setLoser(1)
+        }
+    }, [whiteMinutes, whiteSeconds, blackMinutes, blackSeconds])
+
+    React.useEffect(() => {
+        init();
+    }, [])
+
+    const init = () => {
+        setEndGame(false)
+        setTurn(0)
+        setLoser({})
+        console.log(user.choices)
         additionalTime = gameTypes[user.choices[0]].times[user.choices[1]].additionalTime;
-        var duration = gameTypes[user.choices[0]].times[user.choices[1]].duration;
-        duration *= 60;
+        /* var duration = gameTypes[user.choices[0]].times[user.choices[1]].duration;
+        duration *= 60; */
+        var duration = 4;
         initTimer(0, duration);
         initTimer(1, duration);
-    }, [])
+    }
 
     function doProcess() {
         setTurn(turn === 0 ? 1 : 0);
-        setRunning(true);
+        setRunning(!endGame);
     }
 
     function initTimer(team, duration) {
@@ -37,9 +59,6 @@ const GameDisplayer = ( {gameTypes, user, setViewType} ) => {
             m = Math.floor(duration / 60);
         } 
         s = duration % 60;
-
-        console.log(m)
-        console.log(s)
         if(team === 0) {
             setWhiteMinutes(m)
             setWhiteSeconds(s)
@@ -49,18 +68,26 @@ const GameDisplayer = ( {gameTypes, user, setViewType} ) => {
         }
     }
 
-    /* const goBack = () => {
-        setViewType(EnumViewTypes.GAME_TYPE)
-        user.choices= [];
-    } */
+    const goBack = () => {
+        setInGame(false);
+        var u = {...user};
+        console.log(u)
+        u.choices.pop();
+        u.choice = u.choices[0];
+        setUser(u);
+    }
+
+    const playAgain = () => {
+        init();
+    }
 
     return  <>
                 <Container className="GameDisplayerContainer">
                     <Container className="WhitesContainer">
                         <Button 
-                            className={`GameDisplayerButton ${turn === 1 ? "Filter" : ""}`}
+                            className={`GameDisplayerButton ${loser === 0 ? "Lose" : turn === 1 ? "Filter" : "" }`}
                             onClick={doProcess} 
-                            disabled={turn === 1} >
+                            disabled={!isNaN(loser) || turn === 1} >
                             <Timer
                                 minutes={whiteMinutes}
                                 setMinutes={setWhiteMinutes}
@@ -68,8 +95,7 @@ const GameDisplayer = ( {gameTypes, user, setViewType} ) => {
                                 setSeconds={setWhiteSeconds}
                                 setRunning={setRunning} 
                                 inPause={!running ? 1 : turn} 
-                                additionalTime={additionalTime} 
-                                setEndTimer={setEndTimer} />
+                                additionalTime={additionalTime} />
                         </Button>
                         <Container className="TeamInfosContainer">
                             <p className={`${turn === 0 ? "Focus" : ""}`}>Whites</p>
@@ -78,9 +104,9 @@ const GameDisplayer = ( {gameTypes, user, setViewType} ) => {
                     </Container>
                     <Container className="BlacksContainer">
                         <Button 
-                            className={`GameDisplayerButton ${turn === 0 ? "Filter" : ""}`}
+                            className={`GameDisplayerButton ${loser === 1 ? "Lose" : turn === 0 ? "Filter" : "" }`}
                             onClick={doProcess} 
-                            disabled={turn === 0} >
+                            disabled={!isNaN(loser) || turn === 0} >
                             <Timer
                                 minutes={blackMinutes}
                                 setMinutes={setBlackMinutes}
@@ -88,8 +114,7 @@ const GameDisplayer = ( {gameTypes, user, setViewType} ) => {
                                 setSeconds={setBlackSeconds}
                                 setRunning={setRunning}
                                 inPause={!running ? 1 : !turn} 
-                                additionalTime={additionalTime} 
-                                setEndTimer={setEndTimer} />
+                                additionalTime={additionalTime} />
                         </Button>
                         <Container className="TeamInfosContainer">
                             <p className={`${turn === 1 ? "Focus" : ""}`}>Blacks</p>
@@ -98,15 +123,20 @@ const GameDisplayer = ( {gameTypes, user, setViewType} ) => {
                 </Container>
                 <Container className="InfosContainer">
                     <p>{
-                        !running ? 
-                            "Whites to move !" 
-                                : endTimer ? <></>
-                                    : additionalTime > 0 ? "Additional time : " + additionalTime + "s" 
-                                        : ""
+                            loser === 0 ? "Blacks win..." 
+                                :   loser === 1 ?  "Whites win..."
+                                    :""
+                        }
+                        {
+                            additionalTime > 0 ? "Additional time : " + additionalTime + "s" 
+                                : "" 
                         }
                     </p>
                 </Container>
-                {/* <Button onClick={goBack}>Retour</Button> */}
+                <Container className="SideButtonsContainer">
+                    <Button className="ReturnButton" onClick={goBack}>Go back</Button>
+                    <Button className="PlayAgainButton" onClick={playAgain}>Play Again</Button>
+                </Container>
             </>
 }
 

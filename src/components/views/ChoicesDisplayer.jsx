@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import EnumViewTypes from "../content/EnumViewTypes";
 import Option from '../Option';
 
@@ -68,10 +68,12 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setViewType, set
                 }
                 {
                     viewType !== EnumViewTypes.GAME_TYPE ?
-                        <Button onClick={goBack}>Retour</Button>
+                        <Container className="SideButtonsContainer">
+                            <Button className="ReturnButton" onClick={goBack}>Go back</Button>
+                        </Container>
                             : <></>
                 }
-                
+
             </>
 
 }

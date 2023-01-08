@@ -1,15 +1,19 @@
 .OptionContainer {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
     flex-grow: 1;
+    gap: 10px;
+
 }
 
 .OptionButton {
     padding: 30px 0 40px 0px;
-    width: 200px;
     font-family: 'Old London';
-    font-size: x-large;
+    font-size: xx-large;
+    width: 200px;
 }
 
 .OptionTitle {
@@ -41,10 +45,15 @@
    filter: blur(2px);
 }
 
+.GameDisplayerButton.Lose {
+   background-color: rgb(124, 76, 76);
+   filter: blur(2px);
+}
+
 .InfosContainer {
     transform: rotate(-90deg);
     position: absolute;
-    left: 50%;
+    left: 40%;
     max-width: 100vh;
     font-size: 50px;
 }
@@ -68,4 +77,38 @@
 
 .Focus {
     box-shadow: 0px 10px 10px 10px rgb(25, 148, 74);
+}
+
+.SideButtonsContainer {
+    transform: rotate(-90deg);
+    position: absolute;
+    right: 40%;
+    max-width: 100vh;
+    font-size: 50px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.SideButtonsContainer button {
+    font-size: 30px;
+    padding: 20px;
+    border: none;
+}
+
+
+.ReturnButton {
+    background-color: rgb(170, 150, 60);
+}
+
+.ReturnButton:hover {
+    background-color: rgb(126, 112, 53);
+}
+.PlayAgainButton {
+    background-color: rgb(48, 105, 72);
+}
+
+.PlayAgainButton:hover {
+    background-color: rgb(39, 82, 57);
 }

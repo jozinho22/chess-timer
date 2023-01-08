@@ -13,7 +13,8 @@ const AppManager = ( {user, setUser, gameTypes} ) => {
                         <GameDisplayer 
                             gameTypes={gameTypes}
                             user={user}
-                            setViewType={setViewType} />
+                            setUser={setUser}
+                            setInGame={setInGame} />
                             :  <ChoicesDisplayer 
                                     user={user}
                                     setUser={setUser}

@@ -1,12 +1,7 @@
 import React from 'react';
 
-const Timer = ({minutes, setMinutes, seconds, setSeconds, setRunning, inPause, additionalTime, setEndTimer}) => {
-
+const Timer = ({minutes, setMinutes, seconds, setSeconds, setRunning, inPause, additionalTime}) => {
     const [beginning, setBeginning] = React.useState(true);
-
-    console.log(minutes)
-    console.log(seconds)
-    console.log(additionalTime)
     function addTime(additionalTime) {
         if(additionalTime + seconds > 59) {
             setMinutes(minutes + 1)
@@ -36,7 +31,6 @@ const Timer = ({minutes, setMinutes, seconds, setSeconds, setRunning, inPause, a
                 if (seconds === 0) {
                     if (minutes === 0) {
                         setRunning(false);
-                        setEndTimer(true);
                         setSeconds(seconds);
                         clearInterval(myInterval);
                     } else {

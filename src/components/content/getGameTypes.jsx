@@ -1,8 +1,5 @@
 const getGameTypes = () => {
-
-    var n = 0;
-    var m = 0;
-
+    
     return [
         {
             id: 0,

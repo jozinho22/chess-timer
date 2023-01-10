@@ -43,10 +43,14 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         setTurn(0)
         setLoser({})
         setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
-        var duration = gameTypes[user.choices[0]].times[user.choices[1]].duration;
-        duration *= 60;
-        /* setAdditionalTime(1) 
-        var duration = 3; */ 
+        var duration = 0;
+        if(process.env.NODE_ENV === 'development') {
+            setAdditionalTime(1) 
+            duration = 3;
+        } else {
+            duration = gameTypes[user.choices[0]].times[user.choices[1]]*60;
+        }
+    
         initTimer(0, duration);
         initTimer(1, duration);
     }
@@ -142,7 +146,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                     {
                         endGame ? 
                             <>
-                                <div className={`WinningBox ${loser === 0 ? "Whites" : "Blacks"}`}>
+                                <div className={`WinningBox ${loser === 0 ? "Blacks" : "Whites"}`}>
                                     {loser === 0 ? 
                                         "Blacks won on time..." : 
                                             loser === 1 ? "Whites won on time..." 

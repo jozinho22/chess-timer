@@ -25,7 +25,13 @@
     padding: 20px 0 20px 0px;
     font-family: 'Old London';
     font-size: xx-large;
-    width: 200px;
+   
+}
+
+@media (width < 450px) {
+    .OptionButton { 
+        width: 150px; 
+    }
 }
 
 /* .ChoicesTitle {
@@ -81,14 +87,6 @@
    filter: blur(2px);
 }
 
-/* .InfosContainer {
-    transform: rotate(-90deg);
-    position: absolute;
-    left: 40%;
-    max-width: 100vh;
-    font-size: 50px;
-} */
-
 .TeamCampContainer {
     margin-top: 20px;
     width: 30%;
@@ -118,7 +116,7 @@
 
 .TopLeftButtonsContainer {
     position: absolute;
-    top: 0px;
+    bottom: 10px;
     left: 10px;
 }
 
@@ -149,6 +147,12 @@ svg {
     top: 25%;
     font-size: 50px;
 } 
+
+@media(max-width: 450px) {
+   .InfosContainer {
+        transform: rotate(-90deg);
+   }
+}
 
 .ReturnButton {
     background-color: rgb(170, 150, 60);

@@ -35,7 +35,13 @@
 }
 
 .CustomInputContainer {
-    width: 80%;
+    width: 50%;
+}
+
+@media (width < 450px) {
+    .CustomInputContainer {
+        width: 80%;
+    }
 }
 
 .CustomInputTitle, .CustomInput, .ValidateCustomeGameButton {

@@ -44,17 +44,13 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         setLoser({})
         setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
         var duration = 0;
-        /* if(process.env.NODE_ENV === 'development') {
-            setAdditionalTime(1) 
-            duration = 3;
-        } else {
-            duration = gameTypes[user.choices[0]].times[user.choices[1]]*60;
-        } */
-        console.log(user)
         duration = gameTypes[user.choices[0]].times[user.choices[1]].duration*60;
         if(user.choices[0] === 3) {
-            console.log(gameTypes[user.choices[0]].times[user.choices[1]].durationInSeconds)
             duration += gameTypes[user.choices[0]].times[user.choices[1]].durationInSeconds;
+        }
+        if(process.env.NODE_ENV === 'development') {
+            setAdditionalTime(1) 
+            duration = 3;
         }
         initTimer(0, duration);
         initTimer(1, duration);

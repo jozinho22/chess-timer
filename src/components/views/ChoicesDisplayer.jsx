@@ -74,8 +74,6 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
         next();
     }
 
-    console.log(viewType)
-    console.log(gameTypes[gameTypes.length - 1].id)
     return  <>
                 <Container className="ChoicesDisplayerContainer">
                     <div className="ChoicesTitle">

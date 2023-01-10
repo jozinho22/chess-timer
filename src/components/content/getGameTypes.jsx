@@ -58,6 +58,10 @@ const getGameTypes = () => {
                     additionalTime: 10
                 }
             ]
+        },
+        {
+            id: 3,
+            type: "custom"
         }
     ]
 }

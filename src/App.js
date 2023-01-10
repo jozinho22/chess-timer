@@ -7,13 +7,13 @@ import './styles/Commons.css'
 
 function App() {
 
-  var gameTypes = getGameTypes();
+  const [gameTypes, setGameTypes] = React.useState(getGameTypes());
   const [user, setUser] = React.useState({});
 
 
   return (
       <div className="App">
-          <AppManager user={user} setUser={setUser} gameTypes={gameTypes} />
+          <AppManager user={user} setUser={setUser} gameTypes={gameTypes} setGameTypes={setGameTypes}/>
       </div>
   );
 }

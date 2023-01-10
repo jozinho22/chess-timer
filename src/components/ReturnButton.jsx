@@ -4,7 +4,7 @@ import {BiArrowBack} from 'react-icons/bi';
 
 const ReturnButton = ( {goBack} ) => {
 
-    return  <div className="TopLeftButtonsContainer">
+    return  <div className="BottomLeftButtonsContainer">
                 <Button className="ReturnButton" onClick={goBack}>
                     <BiArrowBack />
                 </Button>

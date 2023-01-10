@@ -1,10 +1,9 @@
-
 import { Button } from 'react-bootstrap';
 import {BiArrowBack} from 'react-icons/bi';
 
 const ReturnButton = ( {goBack} ) => {
 
-    return  <div className="BottomLeftButtonsContainer">
+    return  <div className="LeftButtonsContainer">
                 <Button className="ReturnButton" onClick={goBack}>
                     <BiArrowBack />
                 </Button>

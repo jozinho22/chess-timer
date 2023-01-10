@@ -35,7 +35,7 @@
 }
 
 .CustomInputContainer {
-    width: 50%;
+    width: 30%;
 }
 
 @media (width < 450px) {
@@ -141,17 +141,45 @@ svg {
     gap: 30px;    
 }
 
-
-.BottomLeftButtonsContainer button {
+.LeftButtonsContainer, .RightButtonsContainer {
     position: absolute;
-    bottom: 10px;
+    
+    bottom: 50%;
+}
+
+.LeftButtonsContainer button, .RightButtonsContainer button {
+    width: 80px;
+    height: 80px;
+}
+
+.LeftButtonsContainer svg, .RightButtonsContainer svg {
+    width: 20px;
+    height: 20px;
+}
+
+.LeftButtonsContainer { 
     left: 10px;
 }
 
-.BottomRightButtonsContainer button { 
-    position: absolute;
-    bottom: 10px;
+.RightButtonsContainer { 
     right: 10px;
+}
+
+@media (width < 450px) {
+    .LeftButtonsContainer {
+        bottom: 10px;
+    }
+    .RightButtonsContainer { 
+        bottom: 10px;
+    }
+    .LeftButtonsContainer button, .RightButtonsContainer button {
+        width: fit-content;
+        height: fit-content;
+    }
+    .LeftButtonsContainer svg, .RightButtonsContainer svg {
+        width: 10px;
+        height: 10px;
+    }
 }
 
 .InfosContainer {

@@ -2,9 +2,9 @@ import React from "react";
 import { Container, Button } from "react-bootstrap";
 import Timer from "../Timer";
 import ReturnButton from "../ReturnButton";
+import PlayAgainButton from '../PlayAgainButton';
 import {RxPlay} from 'react-icons/rx';
 import {GiCrossMark} from 'react-icons/gi';
-import {RxUpdate} from 'react-icons/rx';
 
 const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
 
@@ -45,7 +45,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
         var duration = 0;
         duration = gameTypes[user.choices[0]].times[user.choices[1]].duration*60;
-        if(user.choices[0] === 3) {
+        if(user.choices[0] === gameTypes[gameTypes.length - 1].id) {
             duration += gameTypes[user.choices[0]].times[user.choices[1]].durationInSeconds;
         }
         if(process.env.NODE_ENV === 'development') {
@@ -116,7 +116,6 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                             <Container className="TeamCampContainer">
                                 <p className={`${turn === 0 ? "Focus" : ""}`}>Whites</p>
                             </Container>
-                            
                         </Container>
                         <Container className="BlacksContainer">
                             <Button 
@@ -137,11 +136,10 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                 <p className={`${turn === 1 ? "Focus" : ""}`}>Blacks</p>
                             </Container>
                         </Container>
-                    </div>
-                        <div className="BottomRightButtonsContainer">
-                            <Button className="PlayAgainButton" onClick={playAgain}><RxUpdate /></Button>
-                        </div>
+                        <PlayAgainButton playAgain={playAgain} />
                         <ReturnButton goBack={goBack} />
+                    </div>
+
                     <Container className="InfosContainer">
                     {
                         endGame ? 
@@ -165,7 +163,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                 :   <></>
                     }
                    
-                </Container>
+                    </Container>
                 </Container>
                 
             </>

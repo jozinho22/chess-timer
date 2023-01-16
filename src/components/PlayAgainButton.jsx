@@ -3,9 +3,14 @@ import {RxUpdate} from 'react-icons/rx';
 
 const PlayAgainButton = ( {playAgain} ) => {
 
-    return  <div className="RightButtonsContainer">
-                <Button className="PlayAgainButton" onClick={playAgain}><RxUpdate /></Button>
-            </div>
+    let width = document.getElementsByClassName("App")[0].offsetWidth;
+
+    return  <Button className="PlayAgainButton" onClick={playAgain}>  
+                <div className="Icon"> 
+                    <RxUpdate /> {width > 450 ? "Reload" : ""}
+                </div>
+            </Button>
+            
 }
 
 export default PlayAgainButton;

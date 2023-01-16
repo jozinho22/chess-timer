@@ -32,6 +32,7 @@
 
 .ChoicesTitle p {
     font-size: 45px;
+    margin-bottom: 50px;
 }
 
 .CustomInputContainer {
@@ -59,20 +60,45 @@
 .GameDisplayerContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     flex-grow: 1;
     flex-shrink: 1;
     position: relative;
 }
 
-.GameDisplayerContainer > div {
-    width: 100%;
+.GameDisplayerContainer button {
+    color: rgb(207, 199, 199) !important;
 }
 
-.GameDisplayerContainer .Blur {
+.CampsContainer {
+    width: 85%;
+}
+
+
+ .CampsContainer button {
+    background-color: rgb(61, 103, 167) !important;
+    border-color: rgb(61, 103, 167) !important;
+    color: inherit;
+ }
+
+/* .GameDisplayerContainer > div {
+    width: 85%;
+} */
+
+.GameDisplayerContainer.Blur {
     filter: blur(10px);
 }
+
+.GameDisplayerContainer .SoftBlur {
+    filter: blur(2px);
+}
+
+.btn:disabled {
+    background-color: inherit;
+    border-color: inherit;
+}
+
 
 .GameDisplayerButton {
     padding: 20px;
@@ -132,24 +158,17 @@ svg {
     vertical-align: unset;
 }
 
-.InfosContainer {
-    transform: none;
-    position: absolute;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;    
-}
-
 .LeftButtonsContainer, .RightButtonsContainer {
     position: absolute;
-    
     bottom: 50%;
 }
 
 .LeftButtonsContainer button, .RightButtonsContainer button {
     width: 80px;
     height: 80px;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    width: fit-content;
 }
 
 .LeftButtonsContainer svg, .RightButtonsContainer svg {
@@ -158,55 +177,77 @@ svg {
 }
 
 .LeftButtonsContainer { 
-    left: 10px;
+    left: 2%;
 }
 
 .RightButtonsContainer { 
-    right: 10px;
+    right: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    transform: translateY(50%);
 }
 
 @media (width < 450px) {
-    .LeftButtonsContainer {
-        bottom: 10px;
-    }
-    .RightButtonsContainer { 
-        bottom: 10px;
-    }
-    .LeftButtonsContainer button, .RightButtonsContainer button {
-        width: fit-content;
-        height: fit-content;
-    }
     .LeftButtonsContainer svg, .RightButtonsContainer svg {
         width: 10px;
         height: 10px;
     }
 }
 
-.InfosContainer {
+@media (width < 450px) {
+    .Icon svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.EndGameContainer {
+    transform: none;
+    position: absolute;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;   
+    font-size: 50px; 
     top: 25%;
-    font-size: 50px;
-} 
+}
 
 @media(max-width: 450px) {
-   .InfosContainer {
+   .EndGameContainer {
         transform: rotate(-90deg);
    }
 }
 
 .ReturnButton {
     background-color: rgb(170, 150, 60);
+    border-color: rgb(170, 150, 60);
 }
 
 .ReturnButton:hover {
     background-color: rgb(126, 112, 53);
+    border-color: rgb(126, 112, 53);
+}
+
+.InvertButton  {
+    background-color: rgb(108, 68, 145) !important;
+    border-color: rgb(108, 68, 145) !important;
+}
+
+.InvertButton:hover {
+    background-color: rgb(83, 46, 117);
+    border-color: rgb(83, 46, 117);
 }
 
 .PlayAgainButton, .PlayAgainEndGameButton  {
     background-color: rgb(48, 105, 72);
+    border-color: rgb(48, 105, 72);
 }
 
 .PlayAgainButton:hover, .PlayAgainEndGameButton:hover {
     background-color: rgb(39, 82, 57);
+    border-color: rgb(39, 82, 57);
 }
 
 .PlayAgainEndGameButton {
@@ -240,4 +281,8 @@ svg {
 .WinningBox.Blacks {
     background-color: rgb(22, 22, 22);
     color: aliceblue;
+}
+
+.Inverted {
+    transform: rotate(180deg);
 }

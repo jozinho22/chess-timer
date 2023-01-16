@@ -5,14 +5,19 @@ import ReturnButton from "../ReturnButton";
 import PlayAgainButton from '../PlayAgainButton';
 import {RxPlay} from 'react-icons/rx';
 import {GiCrossMark} from 'react-icons/gi';
+import InvertButton from "../InvertButton";
 
 const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
 
     const [running, setRunning] = React.useState(false);
     const [endGame, setEndGame] = React.useState(false);
+    const [reInit, setReInit] = React.useState(false);
+
     const [loser, setLoser] = React.useState({});
 
     const [turn, setTurn] = React.useState(0);
+    const [inverted, setInverted] = React.useState(false);
+
     const [whiteMinutes, setWhiteMinutes] = React.useState(0);
     const [whiteSeconds, setWhiteSeconds] =  React.useState(0);
     const [blackMinutes, setBlackMinutes] = React.useState(0);
@@ -40,6 +45,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
     const init = () => {
         setEndGame(false)
         setRunning(false)
+        setReInit(true);
         setTurn(0)
         setLoser({})
         setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
@@ -93,11 +99,21 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
 
     const stay = () => {
         setEndGame(false);
+        setReInit(false)
     }
 
+    const invert = () => {
+        setInverted(!inverted);
+    }
+
+    console.log("running", running)
+    console.log("endGame", endGame)
+    console.log("reInit", reInit)
+/*     console.log("loser", endGame)
+    console.log("turn", turn) */
     return  <>
-                <Container className="GameDisplayerContainer">
-                    <div className={`${endGame ? "Blur" : ""}`}>
+                <Container className={`GameDisplayerContainer ${endGame ? "Blur" : ""}`} >
+                    <div className={`CampsContainer ${inverted ? "Inverted" : ""}`} >
                         <Container className="WhitesContainer">
                             <Button 
                                 className={`GameDisplayerButton ${loser === 0 ? "Lose" : turn === 1 ? "Filter" : "" }`}
@@ -136,37 +152,49 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                 <p className={`${turn === 1 ? "Focus" : ""}`}>Blacks</p>
                             </Container>
                         </Container>
-                        <PlayAgainButton playAgain={playAgain} />
+
+                    </div>
+                    <div>
+                        <div className="RightButtonsContainer">
+                            <PlayAgainButton playAgain={playAgain} />  
+                            <InvertButton 
+                                invert={invert} 
+                                running={running}
+                                endGame={endGame}
+                                reInit={reInit}
+                            />        
+                        </div>
                         <ReturnButton goBack={goBack} />
                     </div>
-
-                    <Container className="InfosContainer">
-                    {
-                        endGame ? 
-                            <>
-                                <div className={`WinningBox ${loser === 0 ? "Blacks" : "Whites"}`}>
-                                    {loser === 0 ? 
-                                        "Blacks won on time..." : 
-                                            loser === 1 ? "Whites won on time..." 
-                                                : ""
-                                    }
-                                </div>
-                                <Button className="PlayAgainEndGameButton" onClick={playAgain}>
-                                    Play Again
-                                    <RxPlay />
-                                </Button>
-                                <Button className="StayEndGameButton" onClick={stay}>
-                                    Stay
-                                    <GiCrossMark />
-                                </Button>
-                            </>
-                                :   <></>
-                    }
-                   
-                    </Container>
                 </Container>
+                <Container className="EndGameContainer">
+                {
+                    endGame ? 
+                        <>
+                            <div className={`WinningBox ${loser === 0 ? "Blacks" : "Whites"}`}>
+                                {loser === 0 ? 
+                                    "Blacks won on time..." : 
+                                        loser === 1 ? "Whites won on time..." 
+                                            : ""
+                                }
+                            </div>
+                            <Button className="PlayAgainEndGameButton" onClick={playAgain}>
+                                Play Again
+                                <RxPlay />
+                            </Button>
+                            <Button className="StayEndGameButton" onClick={stay}>
+                                Stay
+                                <GiCrossMark />
+                            </Button>
+                        </>
+                            :   <></>
+                }
                 
+                </Container>
             </>
+            
+                
+
 }
 
 export default GameDisplayer;

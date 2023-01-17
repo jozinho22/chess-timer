@@ -6,11 +6,20 @@
     position: relative;
 }
 
+button {
+    color: rgb(207, 199, 199) !important;
+}
+
 .ChoicesContainer {
     display: flex;
     flex-direction: column;
     gap: 30px;
     align-items: center;
+}
+
+.ChoicesContainer button {
+    background-color: rgb(61, 103, 167) !important;
+    border-color: rgb(61, 103, 167) !important;
 }
 
 .OptionButton {
@@ -67,19 +76,21 @@
     position: relative;
 }
 
-.GameDisplayerContainer button {
-    color: rgb(207, 199, 199) !important;
-}
-
 .CampsContainer {
-    width: 85%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
+@media (width < 450px) {
+    .CampsContainer {
+        width: 90%;
+    }
+}
 
- .CampsContainer button {
+.CampsContainer button {
     background-color: rgb(61, 103, 167) !important;
     border-color: rgb(61, 103, 167) !important;
-    color: inherit;
  }
 
 /* .GameDisplayerContainer > div {
@@ -90,15 +101,18 @@
     filter: blur(10px);
 }
 
-.GameDisplayerContainer .SoftBlur {
+.SoftBlur {
     filter: blur(2px);
+}
+
+.Hidden {
+    display: none;
 }
 
 .btn:disabled {
     background-color: inherit;
     border-color: inherit;
 }
-
 
 .GameDisplayerButton {
     padding: 20px;
@@ -150,25 +164,22 @@
    color: aliceblue;
 }
 
-.Focus {
+.Focus p {
     box-shadow: 0px 10px 10px 10px rgb(25, 148, 74);
 }
 
-svg {
-    vertical-align: unset;
-}
-
 .LeftButtonsContainer, .RightButtonsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     position: absolute;
-    bottom: 50%;
 }
 
 .LeftButtonsContainer button, .RightButtonsContainer button {
-    width: 80px;
-    height: 80px;
+    width: fit-content;
+    height: fit-content;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
-    width: fit-content;
 }
 
 .LeftButtonsContainer svg, .RightButtonsContainer svg {
@@ -176,17 +187,9 @@ svg {
     height: 20px;
 }
 
-.LeftButtonsContainer { 
-    left: 2%;
-}
-
 .RightButtonsContainer { 
-    right: 2%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    transform: translateY(50%);
+    /* right: 0%; */
+    align-items: flex-end; 
 }
 
 @media (width < 450px) {
@@ -195,6 +198,10 @@ svg {
         height: 10px;
     }
 }
+
+/* .Icon svg {
+    display: block;
+} */
 
 @media (width < 450px) {
     .Icon svg {
@@ -220,6 +227,18 @@ svg {
    }
 }
 
+.InvertButton {
+    width: fit-content;
+    position: absolute;
+}
+
+.InvertButton svg {
+    cursor: pointer;
+    vertical-align: inherit;
+    width: 30px;
+    height: 30px;
+}
+
 .ReturnButton {
     background-color: rgb(170, 150, 60);
     border-color: rgb(170, 150, 60);
@@ -230,14 +249,23 @@ svg {
     border-color: rgb(126, 112, 53);
 }
 
-.InvertButton  {
+.PauseButton  {
     background-color: rgb(108, 68, 145) !important;
     border-color: rgb(108, 68, 145) !important;
 }
 
-.InvertButton:hover {
+.PauseButton:hover {
     background-color: rgb(83, 46, 117);
     border-color: rgb(83, 46, 117);
+}
+
+.InPause {
+    position: absolute;
+}
+
+.InPause svg {
+    width: 40px;
+    height: 40px;
 }
 
 .PlayAgainButton, .PlayAgainEndGameButton  {

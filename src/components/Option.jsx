@@ -1,13 +1,13 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
-import EnumViewTypes from './content/EnumViewTypes';
+import EnumViewType from './content/EnumViewType';
 
 
 const Option = ( {data, choose, viewType} ) => {
     
     return  <>
                 <Button className="OptionButton" onClick={() => choose(data.id)}>
-                    {viewType === EnumViewTypes.GAME_TYPE ? data.type : data.duration + (data.additionalTime > 0 ? " | " + data.additionalTime: "")}
+                    {viewType === EnumViewType.GAME_TYPE ? data.type : data.duration + (data.additionalTime > 0 ? " | " + data.additionalTime: "")}
                 </Button>
             </>
 

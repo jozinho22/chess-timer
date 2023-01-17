@@ -1,21 +1,26 @@
 import React from "react";
 import { Container, Button } from "react-bootstrap";
 import Timer from "../Timer";
-import ReturnButton from "../ReturnButton";
-import PlayAgainButton from '../PlayAgainButton';
 import {RxPlay} from 'react-icons/rx';
 import {GiCrossMark} from 'react-icons/gi';
 import InvertButton from "../InvertButton";
+
+import {BiArrowBack} from 'react-icons/bi';
+import {AiOutlinePause} from 'react-icons/ai';
+import {RxUpdate} from 'react-icons/rx';
+import EnumButtonType from "../content/EnumButtonType";
+import SideButton from "../SideButton";
 
 const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
 
     const [running, setRunning] = React.useState(false);
     const [endGame, setEndGame] = React.useState(false);
     const [reInit, setReInit] = React.useState(false);
+    const [turn, setTurn] = React.useState(0);
+    const [inPause, setInPause] = React.useState(false);
 
     const [loser, setLoser] = React.useState({});
 
-    const [turn, setTurn] = React.useState(0);
     const [inverted, setInverted] = React.useState(false);
 
     const [whiteMinutes, setWhiteMinutes] = React.useState(0);
@@ -46,6 +51,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         setEndGame(false)
         setRunning(false)
         setReInit(true);
+        setInPause(false);
         setTurn(0)
         setLoser({})
         setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
@@ -97,6 +103,10 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         init();
     }
 
+    const pause = () => {
+        setInPause(!inPause);
+    }
+
     const stay = () => {
         setEndGame(false);
         setReInit(false)
@@ -105,15 +115,15 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
     const invert = () => {
         setInverted(!inverted);
     }
-
-    console.log("running", running)
+console.log("inPause", inPause)
+ /*    console.log("running", running)
     console.log("endGame", endGame)
-    console.log("reInit", reInit)
+    console.log("reInit", reInit) */
 /*     console.log("loser", endGame)
     console.log("turn", turn) */
     return  <>
-                <Container className={`GameDisplayerContainer ${endGame ? "Blur" : ""}`} >
-                    <div className={`CampsContainer ${inverted ? "Inverted" : ""}`} >
+                <Container className={`GameDisplayerContainer ${endGame ? "Blur" : ""} ${inPause ? "SoftBlur" : ""}`} >
+                    <Container className={`CampsContainer ${inverted ? "Inverted" : ""}`} >
                         <Container className="WhitesContainer">
                             <Button 
                                 className={`GameDisplayerButton ${loser === 0 ? "Lose" : turn === 1 ? "Filter" : "" }`}
@@ -127,10 +137,13 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                     running={running}
                                     setRunning={setRunning} 
                                     turn={!turn} 
-                                    additionalTime={additionalTime} />
+                                    additionalTime={additionalTime}
+                                    inPause={inPause} />
                             </Button>
                             <Container className="TeamCampContainer">
-                                <p className={`${turn === 0 ? "Focus" : ""}`}>Whites</p>
+                                <div className={`${turn === 0 ? "Focus" : ""}`}>
+                                    <p>Whites</p>
+                                </div>
                             </Container>
                         </Container>
                         <Container className="BlacksContainer">
@@ -146,27 +159,37 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                     running={running}
                                     setRunning={setRunning}
                                     turn={turn} 
-                                    additionalTime={additionalTime} />
+                                    additionalTime={additionalTime}
+                                    inPause={inPause} />
                             </Button>
                             <Container className="TeamCampContainer">
-                                <p className={`${turn === 1 ? "Focus" : ""}`}>Blacks</p>
+                                <div className={`${turn === 1 ? "Focus" : ""}`}>
+                                    <p>Blacks</p>
+                                </div>
                             </Container>
                         </Container>
-
-                    </div>
-                    <div>
-                        <div className="RightButtonsContainer">
-                            <PlayAgainButton playAgain={playAgain} />  
-                            <InvertButton 
-                                invert={invert} 
-                                running={running}
-                                endGame={endGame}
-                                reInit={reInit}
-                            />        
-                        </div>
-                        <ReturnButton goBack={goBack} />
-                    </div>
+                    </Container>
+                    <InvertButton 
+                        invert={invert} 
+                        running={running}
+                        endGame={endGame}
+                        reInit={reInit}
+                    />   
+                    <Container className="LeftButtonsContainer">
+                        <SideButton action={goBack} icon={<BiArrowBack />} type={EnumButtonType.RETURN} title={"Go back"} />
+                     </Container>
+                     <Container className="RightButtonsContainer">
+                        <SideButton action={playAgain} icon={<RxUpdate />} type={EnumButtonType.PLAY_AGAIN} title={"Play again"} />
+                        <SideButton action={pause} icon={<AiOutlinePause />} type={EnumButtonType.PAUSE} title={"Pause"} /> 
+                    </Container>
                 </Container>
+                {
+                    inPause ?
+                        <Container className="InPause">
+                            <AiOutlinePause onClick={pause}/>
+                        </Container>
+                            : <></>
+                }
                 <Container className="EndGameContainer">
                 {
                     endGame ? 

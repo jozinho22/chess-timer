@@ -1,9 +1,11 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import EnumViewTypes from "../content/EnumViewTypes";
+import EnumViewType from "../content/EnumViewType";
 import Option from '../Option';
-import ReturnButton from '../ReturnButton';
 import CustomInput from '../CustomInput';
+import SideButton from '../SideButton';
+import {BiArrowBack} from 'react-icons/bi';
+import EnumButtonType from '../content/EnumButtonType';
 
 const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, setViewType, setInGame} ) => {
 
@@ -13,7 +15,7 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
 
     const choose = (id) => {
         var u = {...user};
-        if(viewType === EnumViewTypes.GAME_TYPE) {
+        if(viewType === EnumViewType.GAME_TYPE) {
             u.choices = [];
         }
         u.choices.push(id);
@@ -22,8 +24,8 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
     }
 
     const next = () => {
-        if(viewType === EnumViewTypes.GAME_TYPE) {
-            setViewType(EnumViewTypes.GAME_DURATION)
+        if(viewType === EnumViewType.GAME_TYPE) {
+            setViewType(EnumViewType.GAME_DURATION)
         } else {
             setInGame(true)
         } 
@@ -31,16 +33,16 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
     }
 
     const goBack = () => {
-        if(viewType === EnumViewTypes.GAME_DURATION) {
-            setViewType(EnumViewTypes.GAME_TYPE)
+        if(viewType === EnumViewType.GAME_DURATION) {
+            setViewType(EnumViewType.GAME_TYPE)
             user.choices.pop();
         }  
     }
 
     const getDataToMap = (chosen) => {
-        if(viewType === EnumViewTypes.GAME_TYPE) {
+        if(viewType === EnumViewType.GAME_TYPE) {
             return gameTypes;
-        } else if(viewType === EnumViewTypes.GAME_DURATION) {
+        } else if(viewType === EnumViewType.GAME_DURATION) {
             var times = []
             for(var g of gameTypes) {
                 if(g.id === chosen) {
@@ -74,14 +76,14 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
                 <Container className="ChoicesDisplayerContainer">
                     <div className="ChoicesTitle">
                         {
-                            viewType === EnumViewTypes.GAME_TYPE ?
+                            viewType === EnumViewType.GAME_TYPE ?
                                 <p>Choose the type of game </p> 
                                     :   <p>Choose the duration </p>        
                         }
                     </div>
                     <div className="ChoicesContainer">
                         {
-                            user.choices && user.choices[0] === gameTypes[gameTypes.length - 1].id && viewType === EnumViewTypes.GAME_DURATION ?
+                            user.choices && user.choices[0] === gameTypes[gameTypes.length - 1].id && viewType === EnumViewType.GAME_DURATION ?
                                 <CustomInput 
                                     customMinutes={customMinutes}
                                     setCustomMinutes={setCustomMinutes} 
@@ -91,9 +93,9 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
                                     setAdditionalTime={setAdditionalTime}
                                     processCustomGame={processCustomGame} />
                                     :   getDataToMap(
-                                            viewType === EnumViewTypes.GAME_TYPE ?
+                                            viewType === EnumViewType.GAME_TYPE ?
                                                 0 :
-                                                    viewType === EnumViewTypes.GAME_DURATION ?
+                                                    viewType === EnumViewType.GAME_DURATION ?
                                                         user.choices[0] : <></>)
                                         .map(data => {
                                             return <Option
@@ -105,8 +107,10 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
                         }
                     </div>
                         {
-                            viewType !== EnumViewTypes.GAME_TYPE ?
-                                <ReturnButton goBack={goBack} />
+                            viewType !== EnumViewType.GAME_TYPE ?
+                                <div className="LeftButtonsContainer">
+                                    <SideButton action={goBack} icon={<BiArrowBack />} side={"Left"} type={EnumButtonType.RETURN} title={"Go back"} />
+                                </div>
                                     : <></>
                         }
 

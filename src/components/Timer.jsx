@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Timer = ({minutes, setMinutes, seconds, setSeconds, running, setRunning, turn, additionalTime}) => {
+const Timer = ({minutes, setMinutes, seconds, setSeconds, running, setRunning, turn, additionalTime, inPause}) => {
 
     function addTime(additionalTime) {
         if(additionalTime + seconds > 59) {
@@ -22,8 +22,9 @@ const Timer = ({minutes, setMinutes, seconds, setSeconds, running, setRunning, t
     }, [!turn])
 
     React.useEffect(() => {
+        console.log(inPause)
 
-        if(turn && running) {
+        if(turn && running && !inPause) {
 
             let myInterval = setInterval(() => {
                 

@@ -45,12 +45,12 @@ button {
 }
 
 .CustomInputContainer {
-    width: 30%;
+    width: 50%;
 }
 
 @media (width < 450px) {
     .CustomInputContainer {
-        width: 80%;
+        width: 70%;
     }
 }
 
@@ -80,13 +80,14 @@ button {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    /* width: 80%; */
 }
 
-@media (width < 450px) {
+/* @media (width < 450px) {
     .CampsContainer {
         width: 90%;
     }
-}
+} */
 
 .CampsContainer button {
     background-color: rgb(61, 103, 167) !important;
@@ -116,20 +117,25 @@ button {
 
 .GameDisplayerButton {
     padding: 20px;
-    width: 40%;
     height: 30vh;
     font-family: 'Old London';
     font-size: 50px;
 }
 
-@media(max-width: 450px) {
-   .GameDisplayerButton {
-        width: 80%;
-   }
-}
-
 .WhitesContainer {
     transform: rotate(180deg);
+}
+
+.WhitesContainer button, .BlacksContainer button {
+    position: relative;
+    z-index: calc(9e999);
+    width: 50%;
+}
+
+@media (width < 450px) {
+   .WhitesContainer button, .BlacksContainer button {
+        width: 80%;
+    } 
 }
 
 .GameDisplayerButton.Filter {
@@ -137,7 +143,7 @@ button {
 }
 
 .GameDisplayerButton.Lose {
-   background-color: rgb(124, 76, 76);
+   background-color: rgb(124, 76, 76) !important;
    filter: blur(2px);
 }
 
@@ -168,11 +174,21 @@ button {
     box-shadow: 0px 10px 10px 10px rgb(25, 148, 74);
 }
 
-.LeftButtonsContainer, .RightButtonsContainer {
+.LeftButtonsContainer { 
+    width: fit-content;
+    position: absolute;
+    left: 0;
+}
+
+.RightButtonsContainer {
     display: flex;
     flex-direction: column;
     gap: 30px;
     position: absolute;
+    right: 0;
+    align-items: flex-end; 
+    width: fit-content;
+    /* z-index: 1; */
 }
 
 .LeftButtonsContainer button, .RightButtonsContainer button {
@@ -185,11 +201,6 @@ button {
 .LeftButtonsContainer svg, .RightButtonsContainer svg {
     width: 20px;
     height: 20px;
-}
-
-.RightButtonsContainer { 
-    /* right: 0%; */
-    align-items: flex-end; 
 }
 
 @media (width < 450px) {
@@ -255,17 +266,23 @@ button {
 }
 
 .PauseButton:hover {
-    background-color: rgb(83, 46, 117);
-    border-color: rgb(83, 46, 117);
+    background-color: rgb(83, 46, 117) !important;
+    border-color: rgb(83, 46, 117) !important;
 }
 
 .InPause {
     position: absolute;
+    width: 100vw;
+    height: 100vh;
 }
 
 .InPause svg {
-    width: 40px;
-    height: 40px;
+    position: sticky;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    transform: translateY(-25%);
+    cursor: pointer;
 }
 
 .PlayAgainButton, .PlayAgainEndGameButton  {
@@ -313,4 +330,15 @@ button {
 
 .Inverted {
     transform: rotate(180deg);
+}
+
+.CustomInputAlert {
+    position: absolute;
+    width: 100%;
+    bottom: -30%;
+}
+
+.CustomInputAlert p {
+    color: rgb(126, 112, 53);
+    font-size: 22px;
 }

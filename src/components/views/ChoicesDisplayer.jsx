@@ -12,6 +12,7 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
     const [customMinutes, setCustomMinutes] = React.useState(10);
     const [customSeconds, setCustomSeconds] = React.useState(0);
     const [additionalTime, setAdditionalTime] = React.useState(5);
+    const [customGameOK, setCustomGameOK] = React.useState(false);
 
     const choose = (id) => {
         var u = {...user};
@@ -29,7 +30,6 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
         } else {
             setInGame(true)
         } 
-
     }
 
     const goBack = () => {
@@ -49,27 +49,28 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
                     times.push(g)
                 }
             }
-            console.log(times[0])
             return times[0].times;
         }
     }
 
     const processCustomGame = () => {
-        var gamesTypesSlice = [...gameTypes];
-        gamesTypesSlice[gamesTypesSlice.length - 1].times = [
-            {
-                id: 0,
-                duration: parseInt(customMinutes),
-                durationInSeconds: parseInt(customSeconds),
-                additionalTime: parseInt(additionalTime)
-            }
-        ]
+        if(customGameOK) {
+            var gamesTypesSlice = [...gameTypes];
+            gamesTypesSlice[gamesTypesSlice.length - 1].times = [
+                {
+                    id: 0,
+                    duration: parseInt(customMinutes),
+                    durationInSeconds: parseInt(customSeconds === "" ? 0 : customSeconds),
+                    additionalTime: parseInt(additionalTime === "" ? 0 : additionalTime)
+                }
+            ]
 
-        setGameTypes(gamesTypesSlice);
-        var u = {...user};
-        u.choices.push(0);
-        setUser(u);
-        next();
+            setGameTypes(gamesTypesSlice);
+            var u = {...user};
+            u.choices.push(0);
+            setUser(u);
+            next();
+        }
     }
 
     return  <>
@@ -84,6 +85,7 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
                     <div className="ChoicesContainer">
                         {
                             user.choices && user.choices[0] === gameTypes[gameTypes.length - 1].id && viewType === EnumViewType.GAME_DURATION ?
+                                
                                 <CustomInput 
                                     customMinutes={customMinutes}
                                     setCustomMinutes={setCustomMinutes} 
@@ -91,7 +93,9 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
                                     setCustomSeconds={setCustomSeconds}
                                     additionalTime={additionalTime}
                                     setAdditionalTime={setAdditionalTime}
-                                    processCustomGame={processCustomGame} />
+                                    processCustomGame={processCustomGame} 
+                                    setCustomGameOK={setCustomGameOK}/>
+
                                     :   getDataToMap(
                                             viewType === EnumViewType.GAME_TYPE ?
                                                 0 :
@@ -108,9 +112,9 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
                     </div>
                         {
                             viewType !== EnumViewType.GAME_TYPE ?
-                                <div className="LeftButtonsContainer">
-                                    <SideButton action={goBack} icon={<BiArrowBack />} side={"Left"} type={EnumButtonType.RETURN} title={"Go back"} />
-                                </div>
+                                <Container className="LeftButtonsContainer">
+                                    <SideButton action={goBack} icon={<BiArrowBack />} type={EnumButtonType.RETURN} title={"Go back"} />
+                                </Container>
                                     : <></>
                         }
 

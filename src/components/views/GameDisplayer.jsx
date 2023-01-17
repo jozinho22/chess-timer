@@ -23,15 +23,14 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
 
     const [inverted, setInverted] = React.useState(false);
 
-    const [whiteMinutes, setWhiteMinutes] = React.useState(0);
-    const [whiteSeconds, setWhiteSeconds] =  React.useState(0);
-    const [blackMinutes, setBlackMinutes] = React.useState(0);
-    const [blackSeconds, setBlackSeconds] =  React.useState(0);
+    const [whitesTime, setWhitesTime] = React.useState([0, 0]);
+    const [blacksTime, setBlacksTime] = React.useState([0, 0]);
+
     const [additionalTime, setAdditionalTime] =  React.useState(0);
 
     React.useEffect(() => {
-        var whiteLose = running && whiteMinutes === 0 && whiteSeconds === 0;
-        var blackLose = running && blackMinutes === 0 && blackSeconds === 0;
+        var whiteLose = running && whitesTime[0] === 0 && whitesTime[1] === 0;
+        var blackLose = running && blacksTime[0] === 0 && blacksTime[1] === 0;
         if(whiteLose || blackLose) {
             setRunning(false)
             setEndGame(true)
@@ -41,7 +40,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         } else if(blackLose) {
             setLoser(1)
         }
-    }, [whiteMinutes, whiteSeconds, blackMinutes, blackSeconds])
+    }, [whitesTime, blacksTime])
 
     React.useEffect(() => {
         init();
@@ -54,6 +53,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         setInPause(false);
         setTurn(0)
         setLoser({})
+        console.log(user.choices)
         setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
         var duration = 0;
         duration = gameTypes[user.choices[0]].times[user.choices[1]].duration*60;
@@ -83,11 +83,13 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         } 
         s = duration % 60;
         if(team === 0) {
-            setWhiteMinutes(m)
-            setWhiteSeconds(s)
+            /* setWhiteMinutes(m)
+            setWhiteSeconds(s) */
+            setWhitesTime([m, s])
         } else {
-            setBlackMinutes(m)
-            setBlackSeconds(s)
+            /* setBlackMinutes(m)
+            setBlackSeconds(s) */
+            setBlacksTime([m, s])
         }
     }
 
@@ -104,7 +106,9 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
     }
 
     const pause = () => {
-        setInPause(!inPause);
+        if(running) {
+            setInPause(!inPause);
+        }
     }
 
     const stay = () => {
@@ -115,12 +119,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
     const invert = () => {
         setInverted(!inverted);
     }
-console.log("inPause", inPause)
- /*    console.log("running", running)
-    console.log("endGame", endGame)
-    console.log("reInit", reInit) */
-/*     console.log("loser", endGame)
-    console.log("turn", turn) */
+
     return  <>
                 <Container className={`GameDisplayerContainer ${endGame ? "Blur" : ""} ${inPause ? "SoftBlur" : ""}`} >
                     <Container className={`CampsContainer ${inverted ? "Inverted" : ""}`} >
@@ -130,10 +129,8 @@ console.log("inPause", inPause)
                                 onClick={doProcess} 
                                 disabled={!isNaN(loser) || turn === 1} >
                                 <Timer
-                                    minutes={whiteMinutes}
-                                    setMinutes={setWhiteMinutes}
-                                    seconds={whiteSeconds}
-                                    setSeconds={setWhiteSeconds}
+                                    time={whitesTime}
+                                    setTime={setWhitesTime}
                                     running={running}
                                     setRunning={setRunning} 
                                     turn={!turn} 
@@ -152,10 +149,8 @@ console.log("inPause", inPause)
                                 onClick={doProcess} 
                                 disabled={!isNaN(loser) || turn === 0} >
                                 <Timer
-                                    minutes={blackMinutes}
-                                    setMinutes={setBlackMinutes}
-                                    seconds={blackSeconds}
-                                    setSeconds={setBlackSeconds}
+                                    time={blacksTime}
+                                    setTime={setBlacksTime}
                                     running={running}
                                     setRunning={setRunning}
                                     turn={turn} 

@@ -92,6 +92,7 @@ button {
 .CampsContainer button {
     background-color: rgb(61, 103, 167) !important;
     border-color: rgb(61, 103, 167) !important;
+    box-shadow: 4px 4px 0px 0px rgb(41, 79, 138) !important;
  }
 
 /* .GameDisplayerContainer > div {
@@ -129,7 +130,7 @@ button {
 .WhitesContainer button, .BlacksContainer button {
     position: relative;
     z-index: calc(9e999);
-    width: 50%;
+    width: 300px;
 }
 
 @media (width < 450px) {
@@ -144,6 +145,7 @@ button {
 
 .GameDisplayerButton.Lose {
    background-color: rgb(124, 76, 76) !important;
+   box-shadow: 4px 4px 0px 0px rgb(99, 56, 56) !important;
    filter: blur(2px);
 }
 
@@ -177,7 +179,7 @@ button {
 .LeftButtonsContainer { 
     width: fit-content;
     position: absolute;
-    left: 0;
+    left: 10%;
 }
 
 .RightButtonsContainer {
@@ -185,7 +187,7 @@ button {
     flex-direction: column;
     gap: 30px;
     position: absolute;
-    right: 0;
+    right: 10%;
     align-items: flex-end; 
     width: fit-content;
     /* z-index: 1; */
@@ -203,10 +205,25 @@ button {
     height: 20px;
 }
 
+@media (width < 950px) {
+    .LeftButtonsContainer { 
+        left: 5%;
+    }
+    .RightButtonsContainer { 
+        right: 5%;
+    }
+}
+
 @media (width < 450px) {
     .LeftButtonsContainer svg, .RightButtonsContainer svg {
         width: 10px;
         height: 10px;
+    }
+    .LeftButtonsContainer { 
+        left: 0;
+    }
+    .RightButtonsContainer { 
+        right: 0;
     }
 }
 
@@ -232,11 +249,11 @@ button {
     top: 25%;
 }
 
-@media(max-width: 450px) {
+/* @media(max-width: 450px) {
    .EndGameContainer {
         transform: rotate(-90deg);
    }
-}
+} */
 
 .InvertButton {
     width: fit-content;
@@ -301,12 +318,14 @@ button {
 
 .StayEndGameButton {
     background-color: rgb(170, 150, 60);
+    border-color: rgb(170, 150, 60);
     font-size: 30px;
     color: rgb(56, 59, 61);
 }
 
 .StayEndGameButton:hover {
     background-color: rgb(126, 112, 53);
+    border-color: rgb(126, 112, 53);
 }
 
 .PlayAgainEndGameButton, .StayEndGameButton {

@@ -6,6 +6,7 @@ import CustomInput from '../CustomInput';
 import SideButton from '../SideButton';
 import {BiArrowBack} from 'react-icons/bi';
 import EnumButtonType from '../content/EnumButtonType';
+import EnumGameType from '../content/EnumGameType';
 
 const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, setViewType, setInGame} ) => {
 
@@ -78,13 +79,17 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
                     <div className="ChoicesTitle">
                         {
                             viewType === EnumViewType.GAME_TYPE ?
+
                                 <p>Choose the type of game </p> 
-                                    :   <p>Choose the duration </p>        
+                                    :   viewType === EnumViewType.GAME_DURATION ? 
+
+                                            <p>Choose the duration </p>
+                                                :   <></>     
                         }
                     </div>
                     <div className="ChoicesContainer">
                         {
-                            user.choices && user.choices[0] === gameTypes[gameTypes.length - 1].id && viewType === EnumViewType.GAME_DURATION ?
+                            user.choices && user.choices[0] === gameTypes.map(g => g.type).indexOf(EnumGameType.CUSTOM) && viewType === EnumViewType.GAME_DURATION ?
                                 
                                 <CustomInput 
                                     customMinutes={customMinutes}

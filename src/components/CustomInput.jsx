@@ -5,20 +5,16 @@ import getMessagesOfCustomInput from './content/getMessagesOfCustomInput';
 const CustomInput = ( {customMinutes, setCustomMinutes, customSeconds, setCustomSeconds, additionalTime, setAdditionalTime, processCustomGame, setCustomGameOK} ) => {
 
     const [messages, setMessages] = React.useState(getMessagesOfCustomInput());
-    const [messagesToDisplay, setMessagesToDisplay] = React.useState([]);
+    const [messageToDisplay, setMessageToDisplay] = React.useState("");
     
     React.useEffect(() => {
-        let messagesToDisplaySlice = [...messagesToDisplay];
+        let messageToDisplaySlice = {...messageToDisplay};
 
         if(isNaN(customMinutes) || isNaN(customSeconds) || isNaN(additionalTime)) {
-            if(messagesToDisplaySlice.indexOf(0) === -1) {
-                messagesToDisplaySlice.push(0);
-            }      
+            messageToDisplaySlice = messages[0].text;    
         } 
         else if(customMinutes < 1) {
-            if(messagesToDisplaySlice.indexOf(1) === -1) {
-                messagesToDisplaySlice.push(1);
-            } 
+            messageToDisplaySlice = messages[1].text;    
         } else if(customMinutes > 59 || customSeconds > 59 || additionalTime > 59) {
             if(customMinutes > 59) {
                 setCustomMinutes(customMinutes.slice(0, customMinutes.length -1))
@@ -28,21 +24,19 @@ const CustomInput = ( {customMinutes, setCustomMinutes, customSeconds, setCustom
                 setAdditionalTime(additionalTime.slice(0, additionalTime.length -1))
             }
         } else {
-            messagesToDisplaySlice = [];
+            messageToDisplaySlice = "";
         }
-        setMessagesToDisplay(messagesToDisplaySlice)
-
-
+        setMessageToDisplay(messageToDisplaySlice)
 
     }, [customMinutes, customSeconds, additionalTime]);
 
     React.useEffect(() => {
-        if(messagesToDisplay.length > 0) {
+        if(messageToDisplay.length > 0) {
             setCustomGameOK(false);
         } else {
             setCustomGameOK(true);
         }
-    }, [messagesToDisplay]);
+    }, [messageToDisplay]);
 
     return  <>
                 <Container className="CustomInputContainer">
@@ -90,10 +84,8 @@ const CustomInput = ( {customMinutes, setCustomMinutes, customSeconds, setCustom
                 </Container>
                 <Container className="CustomInputAlert">
                     {
-                        messagesToDisplay.length > 0 ?
-                            messagesToDisplay.map((message, index) => {
-                                return <p key={index}>{messages[message].text}</p>
-                            })
+                        messageToDisplay.length > 0 ?
+                             <p>{messageToDisplay}</p>
                                 : <></>
                     }
                 </Container> 

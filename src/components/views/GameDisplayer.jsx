@@ -53,7 +53,6 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         setInPause(false);
         setTurn(0)
         setLoser({})
-        console.log(user.choices)
         setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
         var duration = 0;
         duration = gameTypes[user.choices[0]].times[user.choices[1]].duration*60;

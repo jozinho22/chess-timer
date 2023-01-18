@@ -1,9 +1,11 @@
+import EnumGameType from "./EnumGameType";
+
 const getGameTypes = () => {
     
     return [
         {
             id: 0,
-            type: "blitz",
+            type: EnumGameType.BLITZ,
             times: [
                 {
                     id: 0,
@@ -29,7 +31,7 @@ const getGameTypes = () => {
         },
         {
             id: 1,
-            type: "rapid",
+            type: EnumGameType.RAPID,
             times: [
                 {
                     id: 0,
@@ -45,7 +47,7 @@ const getGameTypes = () => {
         },
         {
             id: 2,
-            type: "long",
+            type: EnumGameType.LONG,
             times: [
                 {
                     id: 0,
@@ -61,7 +63,7 @@ const getGameTypes = () => {
         },
         {
             id: 3,
-            type: "custom"
+            type: EnumGameType.CUSTOM
         }
     ]
 }

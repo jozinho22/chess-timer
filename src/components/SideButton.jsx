@@ -1,5 +1,4 @@
 import { Button } from 'react-bootstrap';
-import {BiArrowBack} from 'react-icons/bi';
 
 const SideButton = ( {action, icon, type, title} ) => {
 

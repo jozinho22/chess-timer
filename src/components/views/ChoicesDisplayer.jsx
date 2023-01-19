@@ -4,7 +4,7 @@ import EnumViewType from "../content/EnumViewType";
 import Option from '../Option';
 import CustomInput from '../CustomInput';
 import SideButton from '../SideButton';
-import {BiArrowBack} from 'react-icons/bi';
+import { ChevronLeft } from 'react-bootstrap-icons';
 import EnumButtonType from '../content/EnumButtonType';
 import EnumGameType from '../content/EnumGameType';
 
@@ -118,7 +118,7 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
                         {
                             viewType !== EnumViewType.GAME_TYPE ?
                                 <Container className="LeftButtonsContainer">
-                                    <SideButton action={goBack} icon={<BiArrowBack />} type={EnumButtonType.RETURN} title={"Go back"} />
+                                    <SideButton action={goBack} icon={<ChevronLeft />} type={EnumButtonType.RETURN} title={"Go back"} />
                                 </Container>
                                     : <></>
                         }

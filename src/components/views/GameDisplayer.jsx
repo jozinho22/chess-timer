@@ -1,13 +1,8 @@
 import React from "react";
 import { Container, Button } from "react-bootstrap";
 import Timer from "../Timer";
-import {RxPlay} from 'react-icons/rx';
-import {GiCrossMark} from 'react-icons/gi';
 import InvertButton from "../InvertButton";
-
-import {BiArrowBack} from 'react-icons/bi';
-import {AiOutlinePause} from 'react-icons/ai';
-import {RxUpdate} from 'react-icons/rx';
+import { ChevronLeft, ArrowRepeat, PlayFill, PauseFill, Check2 } from "react-bootstrap-icons";
 import EnumButtonType from "../content/EnumButtonType";
 import SideButton from "../SideButton";
 
@@ -170,17 +165,17 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                         reInit={reInit}
                     />   
                     <Container className="LeftButtonsContainer">
-                        <SideButton action={goBack} icon={<BiArrowBack />} type={EnumButtonType.RETURN} title={"Go back"} />
+                        <SideButton action={goBack} icon={<ChevronLeft />} type={EnumButtonType.RETURN} title={"Go back"} />
                      </Container>
                      <Container className="RightButtonsContainer">
-                        <SideButton action={playAgain} icon={<RxUpdate />} type={EnumButtonType.PLAY_AGAIN} title={"Play again"} />
-                        <SideButton action={pause} icon={<AiOutlinePause />} type={EnumButtonType.PAUSE} title={"Pause"} /> 
+                        <SideButton action={playAgain} icon={<ArrowRepeat />} type={EnumButtonType.PLAY_AGAIN} title={"Play again"} />
+                        <SideButton action={pause} icon={<PauseFill />} type={EnumButtonType.PAUSE} title={"Pause"} /> 
                     </Container>
                 </Container>
                 {
                     inPause ?
                         <Container className="InPause">
-                            <AiOutlinePause onClick={pause}/>
+                            <PauseFill onClick={pause}/>
                         </Container>
                             : <></>
                 }
@@ -197,11 +192,11 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                             </div>
                             <Button className="PlayAgainEndGameButton" onClick={playAgain}>
                                 Play Again
-                                <RxPlay />
+                                <PlayFill />
                             </Button>
                             <Button className="StayEndGameButton" onClick={stay}>
                                 Stay
-                                <GiCrossMark />
+                                <Check2 />
                             </Button>
                         </>
                             :   <></>

@@ -28,5 +28,5 @@ app.use('^/$', (req, res) => {
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 app.listen(3005, () => {
-    console.log("app is launched")
+    console.log("Joss : app is launched on my static server - port 3005")
 });

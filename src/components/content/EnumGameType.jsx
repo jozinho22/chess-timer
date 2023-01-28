@@ -1,5 +1,5 @@
 const EnumGameType = {
-    BLITZ: "blitz", RAPID: "rapid", LONG: "long", CUSTOM: "custom"
+    BULLET: "bullet", BLITZ: "blitz", RAPID: "rapid", LONG: "long", CUSTOM: "custom"
 }
 
 export default EnumGameType;

@@ -29,7 +29,6 @@
     "eject": "react-scripts eject",
     "serv": "npm run ssr serve -s build -l 3005",
     "ssr": "node server/index.js",
-    "dev": "netlify-dev",
     "postbuild": "react-spa-prerender"
   },
   "eslintConfig": {

@@ -1,13 +1,15 @@
-import logo from './logo.svg';
+import React from 'react';
+import AppManager from './components/AppManager';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import './styles/Commons.css'
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Timer chess</p>
-      </header>
-    </div>
+      <div className="App">
+          <AppManager />
+      </div>
   );
 }
 

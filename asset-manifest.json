@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/chess-timer/static/css/main.8ee5c7f2.css",
+    "main.js": "/chess-timer/static/js/main.f4230157.js",
+    "static/js/787.cff29040.chunk.js": "/chess-timer/static/js/787.cff29040.chunk.js",
+    "static/media/old-london.ttf": "/chess-timer/static/media/old-london.a67214b49bb04c352ce8.ttf",
+    "index.html": "/chess-timer/index.html",
+    "main.8ee5c7f2.css.map": "/chess-timer/static/css/main.8ee5c7f2.css.map",
+    "main.f4230157.js.map": "/chess-timer/static/js/main.f4230157.js.map",
+    "787.cff29040.chunk.js.map": "/chess-timer/static/js/787.cff29040.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8ee5c7f2.css",
+    "static/js/main.f4230157.js"
+  ]
+}

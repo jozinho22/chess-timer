@@ -1,0 +1,20 @@
+{
+  "short_name": "Chess timer",
+  "name": "A chess timer app",
+  "icons": [
+    {
+      "src": "favicon-brasil-mini.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "favicon-brasil-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#404647",
+  "background_color": "#404647"
+}

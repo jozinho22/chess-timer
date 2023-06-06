@@ -1,5 +1,6 @@
 {
   "name": "chess-timer",
+  "homepage": "https://jozinho22.github.io/chess-timer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,14 +23,18 @@
     "serverless-http": "^3.1.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  },
   "scripts": {
     "start": "BROWSER=NONE react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serv": "npm run ssr serve -s build -l 3005",
-    "ssr": "node server/index.js",
-    "postbuild": "react-spa-prerender"
+    "ssr": "node server/index.js"
   },
   "eslintConfig": {
     "extends": [

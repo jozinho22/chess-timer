@@ -76,14 +76,16 @@ const ChoicesDisplayer = ( {user, setUser, viewType, gameTypes, setGameTypes, se
 
     return  <>
                 <Container className="ChoicesDisplayerContainer">
+                    
                     <div className="ChoicesTitle">
                         {
                             viewType === EnumViewType.GAME_TYPE ?
-
-                                <p>Choose the type of game </p> 
+                                <>
+                                    <h1>Pendule pour les joueurs d'échecs</h1>
+                                    <h2>Type de jeu </h2> 
+                                </>
                                     :   viewType === EnumViewType.GAME_DURATION ? 
-
-                                            <p>Choose the duration </p>
+                                            <h2>Durée de jeu </h2>
                                                 :   <></>     
                         }
                     </div>

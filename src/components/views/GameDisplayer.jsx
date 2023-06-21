@@ -11,7 +11,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
     const [running, setRunning] = React.useState(false);
     const [endGame, setEndGame] = React.useState(false);
     const [reInit, setReInit] = React.useState(false);
-    const [turn, setTurn] = React.useState(0);
+    const [turn, setTurn] = React.useState(1);
     const [inPause, setInPause] = React.useState(false);
 
     const [loser, setLoser] = React.useState({});
@@ -29,13 +29,14 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         if(whiteLose || blackLose) {
             setRunning(false)
             setEndGame(true)
+            if(whiteLose) {
+                setLoser(0)
+            } else if(blackLose) {
+                setLoser(1)
+            }
         }
-        if(whiteLose) {
-            setLoser(0)
-        } else if(blackLose) {
-            setLoser(1)
-        }
-    }, [whitesTime, blacksTime])
+        
+    }, [whitesTime, blacksTime, running])
 
     React.useEffect(() => {
         init();
@@ -46,7 +47,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
         setRunning(false)
         setReInit(true);
         setInPause(false);
-        setTurn(0)
+        setTurn(1)
         setLoser({})
         setAdditionalTime(gameTypes[user.choices[0]].times[user.choices[1]].additionalTime);
         var duration = 0;
@@ -133,7 +134,7 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                             </Button>
                             <Container className="TeamCampContainer">
                                 <div className={`${turn === 0 ? "Focus" : ""}`}>
-                                    <p>Whites</p>
+                                    Whites
                                 </div>
                             </Container>
                         </Container>
@@ -152,8 +153,8 @@ const GameDisplayer = ( {gameTypes, user, setUser, setInGame} ) => {
                                     inPause={inPause} />
                             </Button>
                             <Container className="TeamCampContainer">
-                                <div className={`${turn === 1 ? "Focus" : ""}`}>
-                                    <p>Blacks</p>
+                                <div className={`${turn === 1 && running ? "Focus" : ""}`}>
+                                    Blacks
                                 </div>
                             </Container>
                         </Container>

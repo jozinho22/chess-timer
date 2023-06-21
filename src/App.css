@@ -13,5 +13,8 @@
 
 @font-face {
     font-family: 'Old London';
+    font-style: normal;
+    font-weight: normal;
+    size-adjust: 180%;
     src: url('./styles/old-london.ttf');
 }

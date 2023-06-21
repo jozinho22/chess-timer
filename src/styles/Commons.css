@@ -1,3 +1,13 @@
+h1 {
+    text-decoration: underline;
+    margin-bottom: 40px;
+    font-size: x-large;
+}
+
+h2 {
+    margin-bottom: 40px;
+    font-size: large;
+}
 
 .ChoicesDisplayerContainer {
     display: flex;
@@ -15,6 +25,7 @@ button {
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 .ChoicesContainer button {
@@ -23,9 +34,8 @@ button {
 }
 
 .OptionButton {
-    padding: 10px 0 10px 0px;
-    font-family: 'Old London';
-    font-size: xx-large;
+    padding: 10px 10px 20px 10px;
+    font-size: large;
     width: 200px; 
 }
 
@@ -119,8 +129,7 @@ button {
 .GameDisplayerButton {
     padding: 20px;
     height: 30vh;
-    font-family: 'Old London';
-    font-size: 50px;
+    font-size: x-large;
 }
 
 .WhitesContainer {
@@ -154,6 +163,14 @@ button {
     width: 30%;
     position: relative;
     border-radius: 6px;
+    font-size: large;
+    height: 50px;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
+.TeamCampContainer div {
+    padding-top: 5px;
 }
 
 @media(max-width: 450px) {
@@ -168,12 +185,14 @@ button {
 }
 
 .BlacksContainer .TeamCampContainer {
-   background-color: inherit;
+   background-color: black;
    color: aliceblue;
 }
 
-.Focus p {
+.Focus {
     box-shadow: 0px 10px 10px 10px rgb(25, 148, 74);
+    border-radius: 5px;
+    height: 50px;
 }
 
 .LeftButtonsContainer { 
@@ -335,6 +354,7 @@ button {
 .WinningBox {
     border-radius: 5px;
     padding: 20px;
+    font-size: x-large;
 }
 
 .WinningBox.Whites {

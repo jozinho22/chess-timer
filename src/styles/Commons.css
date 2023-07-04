@@ -1,12 +1,21 @@
 h1 {
     text-decoration: underline;
     margin-bottom: 40px;
-    font-size: x-large;
+    font-size: 30px;
 }
 
 h2 {
     margin-bottom: 40px;
-    font-size: large;
+    font-size: 25px;
+}
+
+@media (width < 450px) {
+    h1 { 
+        font-size: 23px;
+    }
+    h2 {
+        font-size: 20px;
+    }
 }
 
 .ChoicesDisplayerContainer {
@@ -35,13 +44,18 @@ button {
 
 .OptionButton {
     padding: 10px 10px 20px 10px;
-    font-size: large;
-    width: 200px; 
+    font-size: 25px;
+    width: 300px; 
+}
+
+.ValidateCustomGameButton {
+    padding: 10px 10px 20px 10px;
 }
 
 @media (width < 450px) {
     .OptionButton { 
         width: 150px; 
+        font-size: 20px;
     }
 }
 
@@ -52,28 +66,6 @@ button {
 .ChoicesTitle p {
     font-size: 45px;
     margin-bottom: 50px;
-}
-
-.CustomInputContainer {
-    width: 50%;
-}
-
-@media (width < 450px) {
-    .CustomInputContainer {
-        width: 70%;
-    }
-}
-
-.CustomInputTitle, .CustomInput, .ValidateCustomeGameButton {
-    font-size: 25px;
-}
-
-.CustomInput {
-    background-color: rgb(131, 134, 136); 
-}
-
-.CustomInput:focus {
-    background-color: rgb(131, 134, 136); 
 }
 
 .GameDisplayerContainer {
@@ -371,6 +363,45 @@ button {
     transform: rotate(180deg);
 }
 
+/* Input */
+.CustomInputContainer {
+    width: 50%;
+}
+
+@media (width < 450px) {
+    .CustomInputContainer {
+        width: 70%;
+    }
+    .CustomInputTitle, .CustomInput {
+        font-size: 13px ! important;
+    }
+}
+
+.CustomInputTitle, .CustomInput {
+    /* font-size: 25px; */
+    padding-bottom: 20px;
+}
+
+.CustomInputGroup {
+    width: 400px;
+    margin: 0 auto;
+}
+
+@media (width < 450px) {
+    .CustomInputGroup {
+        width: 220px;
+    }
+}
+
+.CustomInput {
+    background-color: rgb(131, 134, 136); 
+    line-height: 2;
+}
+
+.CustomInput:focus {
+    background-color: rgb(131, 134, 136); 
+}
+
 .CustomInputAlert {
     position: absolute;
     width: 100%;
@@ -381,3 +412,13 @@ button {
     color: rgb(126, 112, 53);
     font-size: 22px;
 }
+
+@media (width < 450px) {
+    .CustomInputAlert {
+        bottom: -15%;
+    }
+    .CustomInputAlert p {
+       font-size: 14px;
+    }
+}
+

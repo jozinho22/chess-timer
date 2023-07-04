@@ -77,7 +77,7 @@ const CustomInput = ( {customMinutes, setCustomMinutes, customSeconds, setCustom
                             }}
                         />
                     </InputGroup>
-                    <Button className="ValidateCustomeGameButton" onClick={processCustomGame}>
+                    <Button className="ValidateCustomGameButton" onClick={processCustomGame}>
                         Valider
                     </Button>
                     

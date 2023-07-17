@@ -1,16 +1,13 @@
 {
   "files": {
-    "main.css": "/chess-timer/static/css/main.34c7b56c.css",
-    "main.js": "/chess-timer/static/js/main.bfd43ebe.js",
-    "static/js/787.cff29040.chunk.js": "/chess-timer/static/js/787.cff29040.chunk.js",
+    "main.css": "/chess-timer/static/css/main.64c1424f.css",
+    "main.js": "/chess-timer/static/js/main.fef71ada.js",
+    "static/js/27.06f6b24e.chunk.js": "/chess-timer/static/js/27.06f6b24e.chunk.js",
     "static/media/old-london.ttf": "/chess-timer/static/media/old-london.a67214b49bb04c352ce8.ttf",
-    "index.html": "/chess-timer/index.html",
-    "main.34c7b56c.css.map": "/chess-timer/static/css/main.34c7b56c.css.map",
-    "main.bfd43ebe.js.map": "/chess-timer/static/js/main.bfd43ebe.js.map",
-    "787.cff29040.chunk.js.map": "/chess-timer/static/js/787.cff29040.chunk.js.map"
+    "index.html": "/chess-timer/index.html"
   },
   "entrypoints": [
-    "static/css/main.34c7b56c.css",
-    "static/js/main.bfd43ebe.js"
+    "static/css/main.64c1424f.css",
+    "static/js/main.fef71ada.js"
   ]
 }
